@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/DarelJamesNarvasa/devjames-portfolio-react/static/css/main.8e083bcf.css",
+    "main.js": "/DarelJamesNarvasa/devjames-portfolio-react/static/js/main.e5302758.js",
+    "static/js/845.9cc0b641.chunk.js": "/DarelJamesNarvasa/devjames-portfolio-react/static/js/845.9cc0b641.chunk.js",
+    "static/media/devicon.svg?qd25fp": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/devicon.10e33a3796c872bc312e.svg",
+    "static/media/devicon.eot?qd25fp": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/devicon.bb0c9256aeb8aecf3ba6.eot",
+    "static/media/devicon.woff?qd25fp": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/devicon.e4d86e063cb00ba23862.woff",
+    "static/media/devicon.ttf?qd25fp": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/devicon.685a2d4fcee813854715.ttf",
+    "static/media/background.mp4": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/background.b4a32f45ccd7e12909fb.mp4",
+    "static/media/PROFILE.png": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/PROFILE.793cee453c4da276a462.png",
+    "static/media/bootstrap-icons.woff?": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/bootstrap-icons.1295669cd4e305c97f2c.woff",
+    "static/media/bootstrap-icons.woff2?": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/bootstrap-icons.92ea18a81d737146ff04.woff2",
+    "static/media/google-apps-script.png": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/google-apps-script.7a82f43f02ebac9e1321.png",
+    "static/media/programming.png": "/DarelJamesNarvasa/devjames-portfolio-react/static/media/programming.aa2bbfb078acc56d8373.png",
+    "index.html": "/DarelJamesNarvasa/devjames-portfolio-react/index.html",
+    "main.8e083bcf.css.map": "/DarelJamesNarvasa/devjames-portfolio-react/static/css/main.8e083bcf.css.map",
+    "main.e5302758.js.map": "/DarelJamesNarvasa/devjames-portfolio-react/static/js/main.e5302758.js.map",
+    "845.9cc0b641.chunk.js.map": "/DarelJamesNarvasa/devjames-portfolio-react/static/js/845.9cc0b641.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8e083bcf.css",
+    "static/js/main.e5302758.js"
+  ]
+}
