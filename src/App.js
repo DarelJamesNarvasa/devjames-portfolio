@@ -1,6 +1,8 @@
-// import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -16,7 +18,78 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 // import explorePage from './components/page_explore';
 
+
 function App() {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    // Get form data
+    const formData = new FormData(form.current);
+    const time = new Date().toLocaleString();
+
+    // Add timestamp to form data
+    formData.append('time', time);
+
+    console.log({
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+      timestamp: formData.get('time')
+    });
+
+    // Show loading alert
+    Swal.fire({
+      title: 'Sending...',
+      text: 'Please wait while we send your message',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
+    emailjs
+      .sendForm(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        form.current,
+        {
+          publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+        }
+      )
+      .then(
+        () => {
+          console.log('SUCCESS!');
+          Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: 'Thank you for reaching out. I will get back to you soon!',
+            customClass: {
+              confirmButton: 'btn btn-dark rounded-pill px-4 py-2'
+            },
+            buttonsStyling: false
+          });
+          form.current.reset();
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong! Please try again.',
+            footer: error.text,
+            customClass: {
+              confirmButton: 'btn btn-dark rounded-pill px-4 py-2'
+            },
+            buttonsStyling: false
+          });
+        },
+      );
+  };
+
+
   return (
     <div className="App">
       <div className="flex flex-col min-h-screen bg-white text-black">
@@ -170,6 +243,10 @@ function App() {
                           <img src={googleAppScript} alt="Google Apps Script" width="28" height="28" />
                             <p className="mt-2 mb-0">Apps Script</p>
                         </div>
+                        <div className="skill-icon text-center mx-3">
+                            <i className="devicon-react-original colored" style={{ fontSize: 28 }}></i>
+                            <p className="mt-2 mb-0">React</p>
+                        </div>
 
                         <div className="skill-icon text-center mx-3">
                             <i className="devicon-html5-plain colored" style={{ fontSize: 28 }}></i>
@@ -226,6 +303,11 @@ function App() {
                         <div className="skill-icon text-center mx-3">
                             <img src={googleAppScript} alt="Google Apps Script" style={{ width: 28, height: 28 }} />
                             <p className="mt-2 mb-0">Apps Script</p>
+                        </div>
+
+                        <div className="skill-icon text-center mx-3">
+                            <i className="devicon-react-original colored" style={{ fontSize: 28 }}></i>
+                            <p className="mt-2 mb-0">React</p>
                         </div>
                     </div>
                 </div>
@@ -301,32 +383,58 @@ function App() {
           <section id="contact" className="position-relative d-flex align-items-center py-5 bg-light" style={{ minHeight: "100vh", overflow: "hidden" }}>
             <div className="container">
                 <div className="row justify-content-center">
-                <div className="col-lg-8 text-black">
+                  <div className="col-lg-8 text-black">
                     <h2 className="fw-bold mb-4 text-center">Contact Me</h2>
                     <p className="text-center mb-4">Feel free to reach out for collaborations, questions, or just to say hello!</p>
                     
-                    <form id="contact-form">
-                    <div className="mb-3">
-                        <label htmlFor="name" className="form-label">Name</label>
-                        <input type="text" className="form-control" id="name" name="name" required />
-                    </div>
-                    
-                    <div className="mb-3">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="email" name="email" required />
-                    </div>
-                    
-                    <div className="mb-3">
-                        <label htmlFor="message" className="form-label">Message</label>
-                        <textarea className="form-control" id="message" name="message" rows="4" required></textarea>
-                    </div>
-                    
+                    <form ref={form} id="contact-form" onSubmit={sendEmail}>
+                      <div className="mb-3">
+                          <label htmlFor="name" className="form-label">Name</label>
+                          <input 
+                            type="text" 
+                            className="form-control" 
+                            id="name" 
+                            name="name" 
+                            required 
+                          />
+                      </div>
+                      
+                      <div className="mb-3">
+                          <label htmlFor="email" className="form-label">Email</label>
+                          <input 
+                            type="email" 
+                            className="form-control" 
+                            id="email" 
+                            name="email"
+                            required 
+                          />
+                      </div>
 
-                    <input type="hidden" name="time" id="time" />
+                      <div className="mb-3">
+                          <label htmlFor="subject" className="form-label">Subject</label>
+                          <input 
+                            type="text" 
+                            className="form-control" 
+                            id="subject" 
+                            name="subject"
+                            required 
+                          />
+                      </div>
+                      
+                      <div className="mb-3">
+                          <label htmlFor="message" className="form-label">Message</label>
+                          <textarea 
+                            className="form-control" 
+                            id="message" 
+                            name="message"
+                            rows="4" 
+                            required
+                          ></textarea>
+                      </div>
 
-                    <button type="submit" className="btn btn-dark rounded-pill px-4 py-2 fw-semibold">Send Message</button>
+                      <button type="submit" className="btn btn-dark rounded-pill px-4 py-2 fw-semibold">Send Message</button>
                     </form>
-                </div>
+                  </div>
                 </div>
             </div>
           </section>
@@ -349,18 +457,18 @@ function App() {
                     <li><a href="#home" className="text-light text-decoration-none">Home</a></li>
                     <li><a href="#about" className="text-light text-decoration-none">About</a></li>
                     <li><a href="#services" className="text-light text-decoration-none">Services</a></li>
-                    {/* <li><a href="#contact" className="text-light text-decoration-none">Contact</a></li> */}
+                    <li><a href="#contact" className="text-light text-decoration-none">Contact</a></li>
                   </ul>
               </div>
       
-              <div className="col">
+              {/* <div className="col">
                   <h5 className="fw-bold">Legal</h5>
                   <ul className="list-unstyled">
                   <li><a href="#" className="text-light text-decoration-none">Terms of Service</a></li>
                   <li><a href="#" className="text-light text-decoration-none">Privacy Policy</a></li>
                   <li><a href="#" className="text-light text-decoration-none">Cookie Policy</a></li>
                   </ul>
-              </div>
+              </div> */}
               
             
               <div className="col">
