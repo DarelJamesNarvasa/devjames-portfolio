@@ -1,7 +1,7 @@
 {
   "name": "devjames-portfolio",
   "version": "0.1.0",
-  "homepage": "https://github.com/DarelJamesNarvasa/devjames-portfolio-react",
+  "homepage": "https://DarelJamesNarvasa.github.io/devjames-portfolio-react",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
